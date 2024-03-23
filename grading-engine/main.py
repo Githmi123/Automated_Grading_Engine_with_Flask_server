@@ -5,7 +5,7 @@ import openpyxl
 import utils
 ##########################################
 # parameters
-path = 'test_imgs/b1.jpg'
+path = 'grading-engine/test_imgs/b1.jpg'
 heightImg = 850
 widthImg = 600
 questions = 50
@@ -13,7 +13,7 @@ choices = 5
 
 ##########################################
 # load answers from marking_scheme
-workbook = openpyxl.load_workbook('marking_scheme.xlsx')
+workbook = openpyxl.load_workbook('grading-engine/marking_scheme.xlsx')
 worksheet = workbook['MCQ']
 cell_range = worksheet['E2:E51']
 ans = []
