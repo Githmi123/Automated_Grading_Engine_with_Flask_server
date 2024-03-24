@@ -10,7 +10,7 @@ import utils
 def main(directory):
     ##########################################
     # parameters
-    image_paths = ['grading-engine/test_imgs/b1.jpg', 'grading-engine/test_imgs/b2.jpg']
+    # image_paths = ['grading-engine/test_imgs/b1.jpg', 'grading-engine/test_imgs/b2.jpg']
     heightImg = 850
     widthImg = 600
     questions = 50
