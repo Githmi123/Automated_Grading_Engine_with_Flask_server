@@ -7,9 +7,11 @@ import utils
 from output import Output
 
 
-def grade(image_path, marking_scheme):
+def grade(image_path):
     ##########################################
     # parameters
+
+    print("Hi grader")
     path = image_path
     #path = 'imgs/no50.png'
     heightImg = 850
@@ -20,8 +22,12 @@ def grade(image_path, marking_scheme):
 
     ##########################################
     # load answers from marking_scheme
-    workbook = openpyxl.load_workbook(marking_scheme)
+    # workbook = openpyxl.load_workbook('downloaded_marking_scheme/marking_scheme.xlsx')
+    print(image_path)
+    workbook = openpyxl.load_workbook(os.path.join('downloaded_marking_scheme', 'marking_scheme.xlsx'))
+    print(workbook)
     worksheet = workbook['MCQ']
+    print(worksheet)
     #DEFGH - ABCDE
     cell_range = worksheet['H2:H51']
     ans = []
@@ -47,9 +53,10 @@ def grade(image_path, marking_scheme):
     # Finding all contours
     contours, hierarchy = cv.findContours(imgCanny,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_NONE)
     cv.drawContours(imgContours,contours,-1,(0,255,0),1)
-
+    print(contours)
     # finding rectangles
     rectCon = utils.rectContour(contours)
+    print(rectCon)
     biggestContour = utils.getCornerPoints(rectCon[0])
     gradePoints = utils.getCornerPoints(rectCon[1])
 
@@ -166,7 +173,7 @@ def grade(image_path, marking_scheme):
                 grading.append(1)
             else:
                 grading.append(0)
-        score = round((sum(grading) / questions) * 100,2)  # final score
+        score = int(round((sum(grading) / questions) * 100,2))  # final score
         print("SCORE",round(score))
         output = Output(myIndex, ans, score)
         print(output.studentAns)
@@ -342,5 +349,4 @@ def grade(image_path, marking_scheme):
             #     print("Falied to send data. Status code: ", response.status_code)
 
 
-directory = "grading-engine/test_imgs"
-grade(directory)
+# grade("downloaded_images/image_2.jpg")
