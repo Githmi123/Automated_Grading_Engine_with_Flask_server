@@ -1,8 +1,9 @@
 import requests
 import os
+import asyncio
 # from image_processing import fetch_image_urls_from_server
 
-def download_images(image_urls, indexNos, save_dir):
+async def download_images(image_urls, indexNos, save_dir):
     os.makedirs(save_dir, exist_ok= True)
     
     for i, url in enumerate(image_urls):

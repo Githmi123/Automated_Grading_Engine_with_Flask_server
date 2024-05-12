@@ -1,7 +1,8 @@
 import os
 import requests
+import asyncio
 
-def download_markingscheme(scheme_url, save_dir):
+async def download_markingscheme(scheme_url, save_dir):
     os.makedirs(save_dir, exist_ok=True)
 
     response = requests.get(scheme_url)
