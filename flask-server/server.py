@@ -9,7 +9,7 @@ import grader
 import os
 import json
 import numpy as np
-
+from delete_directory_contents import delete_directory_contents
 
 
 # from .aws.aws_utils import fetch_image_urls_from_s3
@@ -70,7 +70,8 @@ def grade_images():
         })
 
     results = json.loads(json.dumps(results, default=lambda x: int(x) if isinstance(x, np.int64) else x))
-
+    delete_directory_contents("downloaded_images")
+    delete_directory_contents("downloaded_marking_scheme")
 
 
     return jsonify(
