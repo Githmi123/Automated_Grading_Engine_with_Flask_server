@@ -69,7 +69,7 @@ def grade_images():
             'markingAns': markingAns
         })
 
-        results = json.loads(json.dumps(results, default=lambda x: int(x) if isinstance(x, np.int64) else x))
+    results = json.loads(json.dumps(results, default=lambda x: int(x) if isinstance(x, np.int64) else x))
 
 
 

@@ -29,7 +29,7 @@ def grade(image_path):
     worksheet = workbook['MCQ']
     print(worksheet)
     #DEFGH - ABCDE
-    cell_range = worksheet['H2:H51']
+    cell_range = worksheet['B2:B51']
     ans = []
     for cell in cell_range:
         ans.append(cell[0].value)
@@ -53,10 +53,10 @@ def grade(image_path):
     # Finding all contours
     contours, hierarchy = cv.findContours(imgCanny,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_NONE)
     cv.drawContours(imgContours,contours,-1,(0,255,0),1)
-    print(contours)
+    # print(contours)
     # finding rectangles
     rectCon = utils.rectContour(contours)
-    print(rectCon)
+    # print(rectCon)
     biggestContour = utils.getCornerPoints(rectCon[0])
     gradePoints = utils.getCornerPoints(rectCon[1])
 
@@ -66,14 +66,14 @@ def grade(image_path):
     # get the 2 biggest contours and determine the left and right
     new_contours = [biggestContour, gradePoints]
     #
-    print("new contours: ")
+    # print("new contours: ")
     #print(new_contours)
     point_of_interest = (0,0)
     min_distance = float('inf')
     for i in range(2):
         contour = new_contours[i]
-        print(contour)
-        print(i)
+        # print(contour)
+        # print(i)
         x,y,w,h = cv.boundingRect(contour)
         distance = np.sqrt(x**2 + y**2)
         print("distance: " + str(distance))
@@ -86,8 +86,8 @@ def grade(image_path):
     else:
         right_contour = new_contours[0]
 
-    print(right_contour)
-    print(left_contour)
+    # print(right_contour)
+    # print(left_contour)
 
     #print(biggestContour.shape)
 
@@ -139,7 +139,7 @@ def grade(image_path):
             myPixelVal[countR][countC] = totalPixels
             countC += 1
             if (countC == choices): countC = 0;countR += 1
-        print(myPixelVal)
+        # print(myPixelVal)
 
         ### RIGHT
         boxes = utils.splitBoxes(imgThreshR)
@@ -156,7 +156,7 @@ def grade(image_path):
             if (countC == choices):
                 countC = 0
                 countR += 1
-        print(myPixelVal)
+        # print(myPixelVal)
 
         # find student answer and enter to a list
         myIndex = []
