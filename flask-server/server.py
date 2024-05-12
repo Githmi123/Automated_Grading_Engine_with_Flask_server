@@ -9,7 +9,8 @@ import grader
 import os
 import json
 import numpy as np
-
+from delete_directory_contents import delete_directory_contents
+import asyncio  
 
 
 # from .aws.aws_utils import fetch_image_urls_from_s3
@@ -30,7 +31,7 @@ def get_image_urls():
 
 
 @app.route("/grade", methods = ['POST'])
-def grade_images():
+async def grade_images():
     print("Hi")
     data = request.get_json()
     
@@ -46,8 +47,12 @@ def grade_images():
         urls.append(url) # better to use a map here
     save_dir = 'downloaded_images'
     save_dir2 = 'downloaded_marking_scheme'
-    download_images(urls, indexNos, save_dir)
-    download_markingscheme(schemeurl, save_dir2)
+
+    await asyncio.gather(
+        download_images(urls, indexNos, save_dir),
+        download_markingscheme(schemeurl, save_dir2)
+    )
+    
     print("After downloading")
     directory = 'downloaded_images'
     images = os.listdir(directory)
@@ -70,7 +75,8 @@ def grade_images():
         })
 
     results = json.loads(json.dumps(results, default=lambda x: int(x) if isinstance(x, np.int64) else x))
-
+    delete_directory_contents("downloaded_images")
+    delete_directory_contents("downloaded_marking_scheme")
 
 
     return jsonify(
