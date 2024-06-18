@@ -173,7 +173,7 @@ def grade(image_path):
                 grading.append(1)
             else:
                 grading.append(0)
-        score = int(round((sum(grading) / questions) * 100,2))  # final score
+        score = sum(grading)  # final score
         print("SCORE",round(score))
         output = Output(myIndex, ans, score)
         print(output.studentAns)
