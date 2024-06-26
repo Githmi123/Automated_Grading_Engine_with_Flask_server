@@ -3,8 +3,6 @@ flask-cors
 numpy
 asyncio
 opencv-python
-numpy
 openpyxl
 requests
 Werkzeug
-opencv-python
