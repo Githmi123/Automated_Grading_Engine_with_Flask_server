@@ -79,7 +79,7 @@ async def grade_images():
 
     results = json.loads(json.dumps(results, default=lambda x: int(x) if isinstance(x, np.int64) else x))
     delete_directory_contents("downloaded_images")
-    delete_directory_contents("downloaded_marking_scheme")
+    # delete_directory_contents("downloaded_marking_scheme")
 
 
     return jsonify(
