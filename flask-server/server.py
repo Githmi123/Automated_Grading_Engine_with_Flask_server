@@ -29,6 +29,9 @@ def get_image_urls():
     image_urls = fetch_image_urls_from_s3(bucket_name)
     return jsonify({"image_urls": image_urls})
 
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
 
 @app.route("/grade", methods = ['POST'])
 async def grade_images():
@@ -89,4 +92,4 @@ async def grade_images():
 
 
 if __name__ == "__main__":
-    app.run(port = 5000, debug = True)
+    app.run(host='0.0.0.0',port = 5000)
